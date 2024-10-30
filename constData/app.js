@@ -1,1 +1,1 @@
-export const mainDomain = ["localhost:3000", "yourdomain.com"]
+export const mainDomain = ["localhost:3000", "cofund.ing"]
