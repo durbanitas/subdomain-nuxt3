@@ -1,0 +1,1 @@
+import{_ as n}from"./B1KOnsZT.js";import{_ as o,c as a,a as s,b as r,w as _,o as c,d}from"./ByZyfuPV.js";const i={};function l(m,t){const e=n;return c(),a("div",null,[t[1]||(t[1]=s("h4",{class:"text-h4"},"subdomain 1",-1)),r(e,{target:"_blank",to:"https://cofund.ing/"},{default:_(()=>t[0]||(t[0]=[d("main")])),_:1})])}const x=o(i,[["render",l]]);export{x as default};

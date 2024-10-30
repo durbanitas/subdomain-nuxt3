@@ -1,0 +1,1 @@
+import{_ as o}from"./B1KOnsZT.js";import{_ as n,c as a,a as r,b as s,w as _,o as l,d as c}from"./ByZyfuPV.js";const d={};function m(f,t){const e=o;return l(),a("div",null,[t[1]||(t[1]=r("h4",null,"Home",-1)),s(e,{target:"_blank",to:"http://demo.localhost:3000/ "},{default:_(()=>t[0]||(t[0]=[c("demo")])),_:1})])}const u=n(d,[["render",m]]);export{u as default};

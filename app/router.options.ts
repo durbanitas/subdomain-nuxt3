@@ -1,44 +1,47 @@
 import type { RouterOptions } from "@nuxt/schema";
+
 export default <RouterOptions>{
   routes: (_routes) => {
-    //_routes give us all the routes
+    // Get the current URL from the cookie
     const currentUrl = useCookie("currentUrl").value;
-    console.log('currentUrl app:', currentUrl)
+    console.log('currentUrl app:', currentUrl);
     let slug = null;
     let page = "";
-    if (currentUrl) {
-      //extract slug
-      slug = currentUrl.match(/(?<=\b(localhost:3000[/]|cofund.ing[/])\b).+/g);
+
+    // Check if the current URL matches either localhost or cofund.ing domains
+    const isValidDomain = /^(localhost:3000|cofund\.ing|demo\.cofund\.ing)$/.test(window.location.hostname);
+
+    if (currentUrl && isValidDomain) {
+      // Extract the slug based on the valid domain
+      slug = currentUrl.match(/(?<=\b(localhost:3000[/]|cofund.ing[/]|demo.cofund.ing[/])\b).+/g);
     }
+
     if (slug) {
       page = slug[0];
-      if (currentUrl.charAt(currentUrl.length - 1) === "/"){
-        //delete last backslash from page name if there's any
-        page = page.substring(0, slug.length - 1);
+      // Remove trailing slash if present
+      if (currentUrl.charAt(currentUrl.length - 1) === "/") {
+        page = page.substring(0, page.length - 1);
       }
     }
 
     const { ssrContext } = useNuxtApp();
     let subdomain = useCookie("subdomain").value;
-    console.log('subdomain',subdomain)
+    console.log('subdomain', subdomain);
+
     if (ssrContext?.event.context.subdomain) {
       subdomain = ssrContext?.event.context.subdomain;
       useCookie("subdomain").value = subdomain;
     }
-    if (subdomain) {
-      // here we check if the subdomain exist filter the routes and find 
-      // the index.vue page of the folder with same name as subdomain 
-      // also if there is any slug find the page in the folder with same name as subdomain
 
+    // If there is a valid subdomain
+    if (subdomain) {
+      // Filter the routes based on the subdomain and page
       const userRoute = _routes.filter((i) => {
-        if (page) return i.path == `/${subdomain}/${page}`;
-        else return i.path == `/${subdomain}`;
+        if (page) return i.path === `/${subdomain}/${page}`;
+        else return i.path === `/${subdomain}`;
       });
 
-
-      // based on what we filtered in previous section we replace the path with proper value
-      // if theres' any page(slug) in line 48 to 50 , 4 example : subdomain1/about will replace with /about
-      // if there's no page line 51 to 53, 4 example : subdomain1/ will replace with / in your url
+      // Map the filtered routes to replace the paths appropriately
       const userRouteMapped = userRoute.map((i) => ({
         ...i,
         path: page
@@ -49,6 +52,7 @@ export default <RouterOptions>{
           ? i.path.replace(`/${subdomain}`, "/")
           : i.path.replace(`/${subdomain}/`, "/"),
       }));
+
       return userRouteMapped;
     }
   },

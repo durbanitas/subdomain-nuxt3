@@ -1,5 +1,6 @@
-import { ssrRenderAttrs } from 'vue/server-renderer';
-import { useSSRContext } from 'vue';
+import { _ as __nuxt_component_0 } from './nuxt-link-COteDoP9.mjs';
+import { withCtx, createTextVNode, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderComponent } from 'vue/server-renderer';
 import { _ as _export_sfc } from './server.mjs';
 import '../runtime.mjs';
 import 'node:http';
@@ -17,7 +18,24 @@ import 'vue-router';
 
 const _sfc_main = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  _push(`<div${ssrRenderAttrs(_attrs)}><h4 class="text-h4">subdomain 1</h4></div>`);
+  const _component_nuxt_link = __nuxt_component_0;
+  _push(`<div${ssrRenderAttrs(_attrs)}><h4 class="text-h4">subdomain 1</h4>`);
+  _push(ssrRenderComponent(_component_nuxt_link, {
+    target: "_blank",
+    to: "https://cofund.ing/"
+  }, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`main`);
+      } else {
+        return [
+          createTextVNode("main")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`</div>`);
 }
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
@@ -28,4 +46,4 @@ _sfc_main.setup = (props, ctx) => {
 const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
 
 export { index as default };
-//# sourceMappingURL=index-DTcDdmn0.mjs.map
+//# sourceMappingURL=index-C5ZisNTK.mjs.map

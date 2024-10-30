@@ -669,7 +669,7 @@ const _routes = [
   {
     name: "demo",
     path: "/demo",
-    component: () => import('./index-DTcDdmn0.mjs')
+    component: () => import('./index-C5ZisNTK.mjs')
   },
   {
     name: "index",
@@ -816,10 +816,11 @@ function writeServerCookie(event, name, value, opts = {}) {
 const routerOptions1 = {
   routes: (_routes2) => {
     const currentUrl = useCookie("currentUrl").value;
+    console.log("currentUrl app:", currentUrl);
     let slug = null;
     let page = "";
     if (currentUrl) {
-      slug = currentUrl.match(new RegExp("(?<=\\b(localhost:3000[/]|yourdomain.com[/])\\b).+", "g"));
+      slug = currentUrl.match(new RegExp("(?<=\\b(localhost:3000[/]|cofund.ing[/])\\b).+", "g"));
     }
     if (slug) {
       page = slug[0];
