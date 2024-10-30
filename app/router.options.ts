@@ -3,7 +3,7 @@ export default <RouterOptions>{
   routes: (_routes) => {
     //_routes give us all the routes
     const currentUrl = useCookie("currentUrl").value;
-    console.log('currentUrl app: ', currentUrl)
+    console.log('currentUrl app:', currentUrl)
     let slug = null;
     let page = "";
     if (currentUrl) {
