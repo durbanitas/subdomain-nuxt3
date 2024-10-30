@@ -2,37 +2,34 @@ import type { RouterOptions } from "@nuxt/schema";
 
 export default <RouterOptions>{
   routes: (_routes) => {
-    // Only proceed with routing adjustments in client context
-    if (process.client) {
-      const { ssrContext } = useNuxtApp();
+    const { ssrContext } = useNuxtApp();
 
-      // Extract subdomain directly from `ssrContext` if available
-      let subdomain = useCookie("subdomain").value;
-      if (ssrContext?.event.context.subdomain) {
-        subdomain = ssrContext.event.context.subdomain;
-        useCookie("subdomain").value = subdomain;
-      }
-
-      // Handle specific domain configurations for `www.cofund.ing` or other valid subdomains
-      if (subdomain === "www" || !subdomain) {
-        // Adjust the routes for `https://www.cofund.ing` or the main domain itself
-        return _routes;
-      } else if (subdomain) {
-        // Filter routes to subdomain-specific folders if any
-        const userRoute = _routes.filter((i) => {
-          return i.path.startsWith(`/${subdomain}`);
-        });
-
-        // Map routes to correct paths for the current subdomain
-        const userRouteMapped = userRoute.map((i) => ({
-          ...i,
-          path: i.path.replace(`/${subdomain}`, ""),
-        }));
-
-        return userRouteMapped;
-      }
+    // Get the current subdomain
+    let subdomain = useCookie("subdomain").value;
+    if (ssrContext?.event.context.subdomain) {
+      subdomain = ssrContext.event.context.subdomain;
+      useCookie("subdomain").value = subdomain;
     }
 
+    // If we are on the main domain or `www`, return all routes directly
+    if (subdomain === "www" || !subdomain) {
+      return _routes;
+    }
+
+    // Filter routes based on the `demo` folder if the subdomain is `demo`
+    if (subdomain === "demo") {
+      const demoRoutes = _routes.filter((i) => i.path.startsWith(`/${subdomain}`));
+
+      // Map paths to remove the `demo` folder prefix
+      const demoRoutesMapped = demoRoutes.map((i) => ({
+        ...i,
+        path: i.path.replace(`/${subdomain}`, ""),
+      }));
+
+      return demoRoutesMapped;
+    }
+
+    // Default: return all routes if no subdomain-specific mapping is needed
     return _routes;
   },
   scrollBehavior(to, from, savedPosition) {
