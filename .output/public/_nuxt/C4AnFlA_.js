@@ -1,0 +1,1 @@
+import{_ as s,c as t,a as n,o}from"./CpYiaLFt.js";const a={};function r(c,e){return o(),t("div",null,e[0]||(e[0]=[n("h4",{class:"text-h4"},"subdomain 1",-1)]))}const l=s(a,[["render",r]]);export{l as default};
