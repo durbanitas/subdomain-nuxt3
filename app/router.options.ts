@@ -8,19 +8,22 @@ export default <RouterOptions>{
     let slug = null;
     let page = "";
 
-    // Check if the current URL matches either localhost or cofund.ing domains
-    const isValidDomain = /^(localhost:3000|cofund\.ing|demo\.cofund\.ing)$/.test(window.location.hostname);
+    // Check if we are in a client context
+    if (process.client) {
+      // Check if the current URL matches either localhost or cofund.ing domains
+      const isValidDomain = /^(localhost:3000|cofund\.ing|demo\.cofund\.ing)$/.test(window.location.hostname);
 
-    if (currentUrl && isValidDomain) {
-      // Extract the slug based on the valid domain
-      slug = currentUrl.match(/(?<=\b(localhost:3000[/]|cofund.ing[/]|demo.cofund.ing[/])\b).+/g);
-    }
+      if (currentUrl && isValidDomain) {
+        // Extract the slug based on the valid domain
+        slug = currentUrl.match(/(?<=\b(localhost:3000[/]|cofund.ing[/]|demo.cofund.ing[/])\b).+/g);
+      }
 
-    if (slug) {
-      page = slug[0];
-      // Remove trailing slash if present
-      if (currentUrl.charAt(currentUrl.length - 1) === "/") {
-        page = page.substring(0, page.length - 1);
+      if (slug) {
+        page = slug[0];
+        // Remove trailing slash if present
+        if (currentUrl.charAt(currentUrl.length - 1) === "/") {
+          page = page.substring(0, page.length - 1);
+        }
       }
     }
 
