@@ -7,7 +7,7 @@ export default <RouterOptions>{
     let page = "";
     if (currentUrl) {
       //extract slug
-      slug = currentUrl.match(/(?<=\b(localhost:3000[/]|yourdomain.com[/])\b).+/g);
+      slug = currentUrl.match(/(?<=\b(localhost:3000[/]|cofund.ing[/])\b).+/g);
     }
     if (slug) {
       page = slug[0];
