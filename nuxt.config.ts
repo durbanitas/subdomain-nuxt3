@@ -1,9 +1,6 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  routeRules: { 
-    '/**': { prerender: true },
-  },
-
+  ssr: true, 
   vite: {
     define: {
       "process.env.DEBUG": false,
