@@ -2,6 +2,7 @@ import { mainDomain } from "@/constData/app";
 import { getCookie, getHeaders } from "h3";
 
 export default defineEventHandler((event) => {
+  console.log('subdomains middleware: ', event)
   const headers = getHeaders(event);
   const hostname = headers.host ?? "yourhost.com";
 
